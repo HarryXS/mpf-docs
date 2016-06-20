@@ -253,5 +253,31 @@ inside your pinball just to find out that your changes did not work.
 But hey, we have samba and we can easily log into this share every time
 our machine boots up.
 
+Start your midnight-commander as root with
+
+::
+
+  sudo mc
+  
+Navigate to /mnt and create a directory (F7) with a nice name, lets say pinball.
+Now navigate to /etc and find the file fstab. Edit this file with F4 and append
+this line:
+
+::
+
+  //WindowsPC/Share1 /mnt/pinball cifs guest 0 0
+  
+If you allowed guests to read/write to this share, if it is password protected
+you will need to write
+
+::
+
+  //WindowsPC/Share1 /mnt/pinball cifs username=yourusername,password=yourpassword 0 0
+  
+Now reboot and you will have a "mirror" of your windows-share under /mnt/pinball
+(its not really a mirror, its the shared drive but you get the point).
+Just cd to this folder and start mpf from there, every change you do on the development
+machine will automatically be inside your pinball, nice isn't it?
+
 
 Enjoy!

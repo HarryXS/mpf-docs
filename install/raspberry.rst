@@ -243,5 +243,15 @@ Login and start mpf-mc inside your machine folder with
 ::
 
   mpf mc
-  
+
+Use a windows share for your pinball development
+------------------------------------------------
+It is a pain to always run to your development machine, 
+put your machine folder onto an USB stick and plug it in your raspi
+inside your pinball just to find out that your changes did not work.
+
+But hey, we have samba and we can easily log into this share every time
+our machine boots up.
+
+
 Enjoy!

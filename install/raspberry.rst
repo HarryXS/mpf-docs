@@ -74,10 +74,17 @@ Now copy your machine folder from your develop station or create a new one under
 If you need a file-manager start mc (No, not the mpf mediacontroller, its the midnight commander ;-))
 
 If you need to copy your folders from an usb-stick you have to manually mount it (we dont have X, so everything has to be done by hand).
+Create a folder in /mnt/usb
 
 ::
 
-    sudo mount /dev/sda1 /mnt 
+  sudo mkdir /mnt/usb
+  
+then mount your stick
+
+::
+
+    sudo mount /dev/sda1 /mnt/usb 
 	
 This works in 90% otherwise your stick is not sda1, just look inside the /dev folder to find out which device you have to mount or type
 
@@ -88,7 +95,7 @@ This works in 90% otherwise your stick is not sda1, just look inside the /dev fo
 to list your block devices.
 
 
-Now you find the contents of your stick in /mnt.
+Now you find the contents of your stick in /mnt/usb.
 
 To tell mpf-mc and the underlying kivy to use the framebuffer via SDL2 you have to put this in your machine/config/config.yaml:
 
@@ -265,16 +272,23 @@ this line:
 
 ::
 
-  //WindowsPC/Share1 /mnt/pinball cifs guest 0 0
+  //WindowsPC/Share1 /mnt/pinball cifs defaults,rw,username=guest 0 0
   
-If you allowed guests to read/write to this share, if it is password protected
-you will need to write
+If you allowed guests to read/write to this share, 
+if it is password protected you will need to write
 
 ::
 
-  //WindowsPC/Share1 /mnt/pinball cifs username=yourusername,password=yourpassword 0 0
+  //WindowsPC/Share1 /mnt/pinball cifs defaults,rw,username=yourusername,password=yourpassword 0 0
   
-Now reboot and you will have a "mirror" of your windows-share under /mnt/pinball
+Now type
+
+::
+
+  sudo mount -av
+  
+
+and you will have a "mirror" of your windows-share under /mnt/pinball
 (its not really a mirror, its the shared drive but you get the point).
 Just cd to this folder and start mpf from there, every change you do on the development
 machine will automatically be inside your pinball, nice isn't it?
